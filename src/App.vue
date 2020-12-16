@@ -7,31 +7,39 @@
 	</button>
 
 	<Block v-if="isPlaying" :delay="delay" @gameEnded="handleGameEnded" />
+
+	<Results v-if="showResults" :score="score" />
 </template>
 
 <script>
 import Block from "./components/Block";
+import Results from "./components/Results";
 
 export default {
 	name: "App",
 	components: {
 		Block,
+		Results
 	},
 	data() {
 		return {
 			isPlaying: false,
 			delay: null,
-			showResults: false
+			showResults: false,
+			score: null,
 		};
 	},
 	methods: {
 		startGame() {
 			this.delay = 2000 + Math.random() * 5000;
 			this.isPlaying = true;
+			this.showResults = false
 		},
 		handleGameEnded(results) {
-
-		}
+			this.isPlaying = false
+			this.score = results.reactionTime
+			this.showResults = true
+		},
 	},
 };
 </script>

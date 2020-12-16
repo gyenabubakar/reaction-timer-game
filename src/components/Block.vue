@@ -33,7 +33,9 @@ export default {
 
 		stopTimer() {
 			clearInterval(this.timer);
-			this.$emit('gameEnded', { reactionTime })
+			this.$emit("gameEnded", {
+				reactionTime: this.reactionTime,
+			});
 		},
 	},
 };
